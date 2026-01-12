@@ -168,7 +168,7 @@ const Banner = () => {
   return (
     <div
       ref={bannerRef}
-      className=" relative w-full h-[60vh] sm:h-[70vh] md:h-[60vh] lg:h-[65vh] xl:h-[80vh] overflow-hidden mb-2"
+      className=" relative w-full h-[60vh] sm:h-[70vh] md:h-[60vh] lg:h-[65vh] xl:h-[80vh] overflow-hidden mb-2 lg:mb-2"
     >
       <AnimatePresence mode="wait">
         <motion.div
@@ -189,7 +189,7 @@ const Banner = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70" />
+            <div className="absolute inset-0 bg-white" />
           </div>
 
           {/* Animated particles - শুধু client-side এ দেখাবে */}
