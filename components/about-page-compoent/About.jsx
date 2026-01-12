@@ -41,7 +41,7 @@ const About = () => {
       <CapabilitiesSection />
       <LeadershipSection />
       <CompanyGallery />
-      <ContactBanner />
+      {/* <ContactBanner /> */}
     </div>
   );
 };

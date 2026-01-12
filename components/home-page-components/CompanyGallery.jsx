@@ -161,7 +161,7 @@ export default function CompanyGallery() {
       alt: "Cloud Services",
       title: "A2it",
       description: "A2IT Office is a trusted IT service provider offering reliable and modern digital solutions.",
-      category: "Team",
+      category: "A2it",
       rowSpan: 1,
       colSpan: 1,
     },
@@ -294,7 +294,7 @@ export default function CompanyGallery() {
   };
 
   return (
-    <section className=" bg-white">
+    <section className=" bg-white mb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8 md:mb-12 pt-10">

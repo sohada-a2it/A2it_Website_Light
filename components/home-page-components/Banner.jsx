@@ -168,7 +168,7 @@ const Banner = () => {
   return (
     <div
       ref={bannerRef}
-      className=" relative w-full h-[60vh] sm:h-[70vh] md:h-[60vh] lg:h-[65vh] xl:h-[80vh] overflow-hidden mb-30"
+      className=" relative w-full h-[60vh] sm:h-[70vh] md:h-[60vh] lg:h-[65vh] xl:h-[80vh] overflow-hidden mb-2"
     >
       <AnimatePresence mode="wait">
         <motion.div
