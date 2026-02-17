@@ -7,8 +7,19 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa";
 import Logo from "./Logo";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
+     const pathname = usePathname();
+    
+    // Check if current path is the one where navbar should be hidden
+    const hideNavbarPaths = ['/promotions/a2itwebsite/']; // Add your paths here
+    const shouldHideNavbar = hideNavbarPaths.includes(pathname);
+    
+    // If navbar should be hidden, return null (render nothing)
+    if (shouldHideNavbar) {
+      return null;
+    } 
   // Route configuration
   const routes = {
     HOME: "/",

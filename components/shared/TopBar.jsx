@@ -1,4 +1,5 @@
 "use client";
+import { usePathname } from "next/navigation";
 import React from "react";
 import {
   FaPhoneAlt,
@@ -11,6 +12,16 @@ import {
 } from "react-icons/fa";
 
 const TopBar = () => {
+     const pathname = usePathname();
+    
+    // Check if current path is the one where navbar should be hidden
+    const hideNavbarPaths = ['/promotions/a2itwebsite/']; // Add your paths here
+    const shouldHideNavbar = hideNavbarPaths.includes(pathname);
+    
+    // If navbar should be hidden, return null (render nothing)
+    if (shouldHideNavbar) {
+      return null;
+    } 
   return (
     <div className="bg-white text-[#e0e0ff] px-3 sm:px-4 py-2 flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm border-b border-[#0066ff]/30">
       {/* Contact Info - Mobile: side by side, Desktop: same row */}

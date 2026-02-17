@@ -20,7 +20,16 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
-  const pathname = usePathname();
+   const pathname = usePathname();
+  
+  // Check if current path is the one where navbar should be hidden
+  const hideNavbarPaths = ['/promotions/a2itwebsite/']; // Add your paths here
+  const shouldHideNavbar = hideNavbarPaths.includes(pathname);
+  
+  // If navbar should be hidden, return null (render nothing)
+  if (shouldHideNavbar) {
+    return null;
+  } 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
