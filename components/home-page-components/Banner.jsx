@@ -189,7 +189,7 @@ const Banner = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             />
-            <div className="absolute inset-0 bg-white" />
+            <div className="absolute inset-0 bg-black/50" />
           </div>
 
           {/* Animated particles - শুধু client-side এ দেখাবে */}

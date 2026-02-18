@@ -1,6 +1,29 @@
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
+import ConsultModal from '@/components/promotion/promotionModal';
 
-const contact = () => {
+const Contact = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handlePhoneClick = () => {
+    window.location.href = 'tel:+18723353070';
+  };
+
+  const handleLiveChatClick = () => {
+    // Format: https://wa.me/phone_number?text=optional_message
+    const phoneNumber = '18723353070'; // Remove any special characters
+    const message = encodeURIComponent("Hello! I'm interested in your services.");
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+  };
+
   return (
     <div className="min-h-screen bg-[#e8d5c8] flex items-center justify-center p-4 overflow-hidden relative">
       
@@ -39,13 +62,19 @@ const contact = () => {
         
         {/* Get a Quote Button */}
         <div className="absolute top-1/2 -left-4 md:-left-12 transform -translate-y-1/2">
-          <button className="bg-[#0071bc] text-white px-8 py-4 rounded-lg font-black shadow-[10px_10px_20px_rgba(0,0,0,0.2)] hover:scale-105 transition-all text-sm md:text-base uppercase">
+          <button 
+            onClick={handleOpenModal}
+            className="bg-[#0071bc] text-white px-8 py-4 rounded-lg font-black shadow-[10px_10px_20px_rgba(0,0,0,0.2)] hover:scale-105 transition-all text-sm md:text-base uppercase cursor-pointer"
+          >
             Get a Quote
           </button>
         </div>
 
         {/* Phone Number Box */}
-        <div className="absolute -bottom-8 right-0 md:right-[-10%] bg-[#2d3436] text-white p-4 px-6 rounded-xl flex items-center gap-3 shadow-2xl border border-gray-600">
+        <div 
+          onClick={handlePhoneClick}
+          className="absolute -bottom-8 right-0 md:right-[-10%] bg-[#2d3436] text-white p-4 px-6 rounded-xl flex items-center gap-3 shadow-2xl border border-gray-600 cursor-pointer hover:bg-[#3d4346] transition-colors"
+        >
           <div className="bg-white/10 p-2 rounded-full">
              <span className="text-xl">📞</span>
           </div>
@@ -55,7 +84,10 @@ const contact = () => {
         </div>
 
         {/* Live Chat Component */}
-        <div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 bg-[#fbe5d6] border-2 border-[#e6ccb2] px-10 py-4 rounded-xl shadow-xl flex items-center gap-3 cursor-pointer hover:bg-white transition-colors">
+        <div 
+          onClick={handleLiveChatClick}
+          className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 bg-[#fbe5d6] border-2 border-[#e6ccb2] px-10 py-4 rounded-xl shadow-xl flex items-center gap-3 cursor-pointer hover:bg-white transition-colors"
+        >
           <span className="text-2xl">💬</span>
           <span className="text-[#a68a73] font-bold text-lg">Live Chat With Us</span>
           {/* Small tail for chat */}
@@ -63,8 +95,14 @@ const contact = () => {
         </div>
 
       </div>
+
+      {/* Consult Modal */}
+      <ConsultModal 
+        isOpen={isModalOpen} 
+        onClose={handleCloseModal} 
+      />
     </div>
   );
 };
 
-export default contact;
+export default Contact;
