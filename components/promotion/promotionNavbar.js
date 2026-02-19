@@ -4,7 +4,7 @@
 import { useState, useEffect } from 'react';
 import { Phone, Mail, MessageCircle, Menu, X } from 'lucide-react';
 
-const navbar = () => {
+const PromotionNavbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -24,7 +24,7 @@ const navbar = () => {
           w-full left-0 z-50 transition-all duration-300
           ${scrolled 
             ? 'fixed top-0 bg-secondary/95 backdrop-blur-md shadow-lg border-b border-[#f5b342]' 
-            : 'absolute top-0 bg-gradient-to-b from-black/30 to-transparent'
+            : 'absolute top-0 bg-gradient-to-b from-black/50 to-transparent'
           }
         `}
       >
@@ -46,15 +46,15 @@ const navbar = () => {
               {/* Email */}
               <div className={`
                 items-center gap-2
-                ${scrolled ? 'text-gray-700' : 'text-white'}
+                ${scrolled ? 'text-white bg-red-500 p-2 rounded-full' : 'text-white'}
               `}>
                 <a 
-                  href="mailto:LEADS@DESIGNSGENIE.COM"
+                  href="mailto:info@a2itltd.com"
                   className="hidden lg:flex items-center gap-2 group"
                 >
                   <Mail size={18} className="text-[#f5b342] group-hover:scale-110 transition-transform" />
                   <span className="text-sm hover:text-[#f5b342] transition-colors border-b border-dashed border-white/30 whitespace-nowrap">
-                    LEADS@DESIGNSGENIE.COM
+                    info@a2itltd.com
                   </span>
                 </a>
               </div>
@@ -62,62 +62,42 @@ const navbar = () => {
               {/* Phone */}
               <div className={`
                 flex items-center gap-2
-                ${scrolled ? 'text-gray-700' : 'text-white'}
+                ${scrolled ? 'text-white bg-blue-500 p-2 rounded-full' : 'text-white'}
               `}>
                 <a 
-                  href="tel:+18723353070"
+                  href="tel:+880 1846-937397"
                   className="flex items-center gap-2 group"
                 >
                   <Phone size={18} className="text-[#f5b342] group-hover:scale-110 transition-transform" />
-                  <span className="font-medium hover:text-[#f5b342] transition-colors whitespace-nowrap text-sm lg:text-base">
-                    (872) 335-3070
+                  <span className="font-medium hover:text-[#f5b342] transition-colors whitespace-nowrap text-sm lg:text-sm">
+                    +880 1846-937397
                   </span>
                 </a>
               </div>
 
               {/* Chat Button */}
-              <button className={`
-                bg-[#f5b342] text-[#0b1c2f] font-semibold rounded-full 
-                flex items-center gap-2 transition-all duration-300
-                hover:bg-[#f5b342]/90 hover:scale-105 active:scale-95
-                whitespace-nowrap group
-                ${scrolled 
-                  ? 'py-2 px-4 text-sm shadow-md' 
-                  : 'py-2.5 px-5 text-sm lg:text-base shadow-lg shadow-[#f5b342]/20'
-                }
-              `}>
-                <MessageCircle size={18} className="group-hover:rotate-12 transition-transform" />
-                <span className="hidden sm:inline">CHAT WITH US</span>
-                <span className="sm:hidden">CHAT</span>
-              </button>
+              <a 
+  href="https://www.facebook.com/A2ITLtd"
+  className={`
+    bg-[#f5b342] text-[#0b1c2f] font-semibold rounded-full 
+    flex items-center gap-2 transition-all duration-300
+    hover:bg-[#f5b342]/90 hover:scale-105 active:scale-95
+    whitespace-nowrap group
+    ${scrolled 
+      ? 'py-2 px-4 text-sm shadow-md' 
+      : 'py-2.5 px-5 text-sm lg:text-base shadow-lg shadow-[#f5b342]/20'
+    }
+  `}
+>
+  <MessageCircle size={18} className="group-hover:rotate-12 transition-transform" />
+  <span className="hidden sm:inline">Connect with us</span>
+  <span className="sm:hidden">Connect</span>
+</a>
             </div>
 
             {/* Mobile Menu Button */}
             <div className="flex md:hidden items-center gap-3">
-              {/* Mobile Phone - Always visible */}
-              <a 
-                href="tel:+18723353070"
-                className={`
-                  p-2 rounded-full transition-all duration-300
-                  ${scrolled 
-                    ? 'bg-secondary/80 text-gray-300' 
-                    : 'bg-white/10 text-white backdrop-blur-sm'
-                  }
-                `}
-              >
-                <Phone size={18} className="text-[#f5b342]" />
-              </a>
-
-              {/* Mobile Chat Icon */}
-              <button className={`
-                p-2 rounded-full transition-all duration-300
-                ${scrolled 
-                  ? 'bg-secondary/80 text-gray-300' 
-                  : 'bg-white/10 text-white backdrop-blur-sm'
-                }
-              `}>
-                <MessageCircle size={18} className="text-[#f5b342]" />
-              </button>
+              {/* Mobile Phone - Always visible */}  
 
               {/* Hamburger Menu */}
               <button 
@@ -149,7 +129,7 @@ const navbar = () => {
             `}>
               {/* Mobile Email */}
               <a 
-                href="mailto:LEADS@DESIGNSGENIE.COM"
+                href="info@a2itltd.com"
                 className={`
                   flex items-center gap-3 p-2 rounded-lg transition-colors
                   ${scrolled ? 'text-gray-300' : 'text-white'}
@@ -157,12 +137,12 @@ const navbar = () => {
                 `}
               >
                 <Mail size={18} className="text-[#f5b342]" />
-                <span className="text-sm">LEADS@DESIGNSGENIE.COM</span>
+                <span className="text-sm">info@a2itltd.com</span>
               </a>
 
               {/* Mobile Phone (full) */}
               <a 
-                href="tel:+18723353070"
+                href="tel:+880 1846-937397"
                 className={`
                   flex items-center gap-3 p-2 rounded-lg transition-colors
                   ${scrolled ? 'text-gray-300' : 'text-white'}
@@ -170,18 +150,21 @@ const navbar = () => {
                 `}
               >
                 <Phone size={18} className="text-[#f5b342]" />
-                <span className="text-sm font-medium">(872) 335-3070</span>
+                <span className="text-sm font-medium">+880 1846-937397</span>
               </a>
 
               {/* Mobile Full Chat Button */}
-              <button className="
-                w-full bg-[#f5b342] text-[#0b1c2f] font-semibold rounded-lg 
-                flex items-center justify-center gap-2 py-3 px-4
-                hover:bg-[#f5b342]/90 transition-all duration-300
-              ">
-                <MessageCircle size={18} />
-                <span>CHAT WITH US</span>
-              </button>
+              <button 
+  onClick={() => window.open('https://www.facebook.com/A2ITLtd', '_blank')}
+  className="
+    w-full bg-[#f5b342] text-[#0b1c2f] font-semibold rounded-lg 
+    flex items-center justify-center gap-2 py-3 px-4
+    hover:bg-[#f5b342]/90 transition-all duration-300
+  "
+>
+  <MessageCircle size={18} className="text-[#0b1c2f]" />
+  <span>Connect with us</span>
+</button>
             </div>
           </div>
         </div>
@@ -193,4 +176,4 @@ const navbar = () => {
   );
 };
 
-export default navbar;
+export default PromotionNavbar;

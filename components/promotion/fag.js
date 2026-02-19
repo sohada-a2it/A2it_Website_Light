@@ -65,7 +65,7 @@ function Counter({ value }) {
   );
 }
 
-export default function WebFAQ() {
+export default function Fag() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (

@@ -3,7 +3,7 @@ import { PhoneCall, FileText, MessageCircle } from 'lucide-react';
 import { useState } from 'react';
 import ConsultModal from '@/components/promotion/promotionModal';
 
-export default function FloatingButtons() {
+export default function FloatingChatButtons() {
   const [hoveredButton, setHoveredButton] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 

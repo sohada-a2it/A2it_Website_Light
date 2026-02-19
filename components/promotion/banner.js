@@ -63,29 +63,103 @@ const PlatformsSlider = () => {
 };
 
 // Main Hero Section
-const banner = () => {
+const Banner = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
+    package: '', 
     description: "",
   });
 
   const [mounted, setMounted] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', or null
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    
+    // Validate form
+    if (!formData.name || !formData.email || !formData.phone || !formData.package) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    // Package details mapping for better email content
+    const packageDetails = {
+      starter: 'Starter Package - Basic website with 5 pages',
+      popular: 'Popular Package 🔥 - 10 pages, E-commerce ready',
+      premium: 'Premium Package ⭐ - Custom website, Unlimited pages'
+    };
+
+    try {
+      const response = await fetch('https://a2-it-website-backend.vercel.app/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type: 'banner_inquiry',
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          model: packageDetails[formData.package] || formData.package,
+          shippingTerm: '50% OFF Eligible - Website Package',
+          message: formData.description || 'No project description provided',
+          subject: `🎯 NEW BANNER INQUIRY: ${formData.package} Package - 50% OFF`
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          package: '',
+          description: "",
+        });
+        
+        // Auto close form after 3 seconds on success
+        setTimeout(() => {
+          setShowForm(false);
+          setSubmitStatus(null);
+        }, 3000);
+      } else {
+        setSubmitStatus('error');
+        console.error('Submission error:', data.error);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    // Clear status when user starts typing again
+    if (submitStatus) setSubmitStatus(null);
   };
+
+  // Package details for dropdown
+  const packageOptions = [
+    { value: 'starter', label: 'Starter Package', price: '$99' },
+    { value: 'popular', label: 'Popular Package 🔥', price: '$199' },
+    { value: 'premium', label: 'Premium Package ⭐', price: '$299' }
+  ];
 
   if (!mounted) return null;
 
@@ -94,9 +168,8 @@ const banner = () => {
       
       {/* Platforms Logos Floating Above Banner */}
       <div className="absolute bottom-2 z-40 left-0 w-full flex justify-center">
-  <PlatformsSlider />
-</div>
-
+        <PlatformsSlider />
+      </div>
 
       {/* Background Image with Dark Overlay */}
       <div className="absolute inset-0 z-0">
@@ -125,12 +198,16 @@ const banner = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className={`inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#f5b342]/30 w-auto hover:border-[#f5b342]/50 hover:bg-white/15 transition-all group cursor-pointer ${showForm ? '' : 'mx-auto'}`}
+              className={`inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-[#f5b342]/20 to-[#f5b342]/5 backdrop-blur-md px-4 sm:px-6 py-2 sm:py-3 rounded-full border-2 border-[#f5b342] shadow-lg shadow-[#f5b342]/30 hover:shadow-[#f5b342]/50 hover:scale-105 hover:border-[#f5b342] transition-all duration-300 group cursor-pointer ${showForm ? '' : 'mx-auto'}`}
             >
-              <Sparkles size={14} className="text-[#f5b342] animate-pulse" />
-              <span className="text-[10px] sm:text-xs font-medium text-[#f5b342] tracking-wide whitespace-nowrap">
-                WEBSITES FROM $199
+              <div className="relative">
+                <Sparkles size={20} className="text-[#f5b342] animate-pulse" />
+                <div className="absolute inset-0 bg-[#f5b342] blur-md opacity-50 animate-ping"></div>
+              </div>
+              <span className="text-sm sm:text-base font-bold text-[#f5b342] tracking-wide whitespace-nowrap bg-gradient-to-r from-[#f5b342] to-[#f5b342]/80 bg-clip-text text-transparent">
+                WEBSITES FROM $99
               </span>
+              <div className="w-1.5 h-1.5 rounded-full bg-[#f5b342] animate-pulse"></div>
             </motion.div>
 
             {/* Heading */}
@@ -141,12 +218,12 @@ const banner = () => {
               className={`text-xl font-bold leading-tight ${showForm ? '' : 'mx-auto'}`}
             >
               <span className="text-white">Web Designs Starts from </span>{' '}
-              <span className="text-[#f5b342] relative inline-block"> 
-                $199 ONLY
+              <span className="text-[#f5b342] relative inline-block font-bold text-2xl"> 
+                $99 ONLY
                 <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-[#f5b342] to-transparent rounded-full"></span>
               </span>
               <br />
-              <span className="text-lg sm:text-xl md:text-2xl text-gray-200 font-normal block mt-2 sm:mt-3 max-w-2xl ${showForm ? '' : 'mx-auto'}">
+              <span className="text-lg sm:text-xl md:text-2xl text-gray-200 font-normal block mt-2 sm:mt-3 max-w-2xl">
                 Your Vision, Our Magic ✨
               </span>
             </motion.h1>
@@ -158,7 +235,7 @@ const banner = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className={`text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl border-l-2 border-[#f5b342] pl-4 italic ${showForm ? '' : 'mx-auto'}`}
             >
-              Designs Genie is your versatile platform for crafting stunning, interactive websites, catering to personal blogs, e-commerce shops, corporate sites, and custom web applications, all designed to captivate your audience.
+              Designs A2it is your versatile platform for crafting stunning, interactive websites, catering to personal blogs, e-commerce shops, corporate sites, and custom web applications, all designed to captivate your audience.
             </motion.p> 
 
             {/* CTA Buttons */}
@@ -178,15 +255,6 @@ const banner = () => {
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform relative z-10" />
                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
               </motion.button>
-              
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="border border-white/30 text-white text-sm sm:text-base font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-white/20 transition-all flex items-center justify-center gap-2 backdrop-blur-sm hover:border-white/40 group"
-              >
-                <MessageCircle size={18} className="group-hover:rotate-12 transition-transform" />
-                CHAT WITH US
-              </motion.button>
             </motion.div>
           </div>
 
@@ -205,8 +273,12 @@ const banner = () => {
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0 }}
-                  onClick={() => setShowForm(false)}
+                  onClick={() => {
+                    setShowForm(false);
+                    setSubmitStatus(null);
+                  }}
                   className="absolute -top-2 -right-2 z-30 bg-white/20 backdrop-blur-sm text-white p-1.5 rounded-full hover:bg-white/30 transition-all border border-white/30"
+                  disabled={isSubmitting}
                 >
                   <X size={16} />
                 </motion.button>
@@ -259,6 +331,27 @@ const banner = () => {
                         </motion.div>
                       </motion.div>
 
+                      {/* Status Messages */}
+                      {submitStatus === 'success' && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="mb-3 p-2 bg-green-500/20 border border-green-500/30 rounded-lg flex items-center gap-2 text-green-400 text-xs"
+                        > 
+                          <span>Thank you! Your inquiry has been sent successfully!</span>
+                        </motion.div>
+                      )}
+
+                      {submitStatus === 'error' && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="mb-3 p-2 bg-red-500/20 border border-red-500/30 rounded-lg flex items-center gap-2 text-red-400 text-xs"
+                        > 
+                          <span>Something went wrong. Please try again.</span>
+                        </motion.div>
+                      )}
+
                       {/* Form */}
                       <form onSubmit={handleSubmit} className="space-y-2.5">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -276,13 +369,18 @@ const banner = () => {
                                 value={formData[field]}
                                 onChange={handleChange}
                                 className="w-full px-3 py-2.5 bg-white/10 border border-white/20 rounded-lg text-white text-xs placeholder-gray-300 focus:outline-none focus:border-[#f5b342] focus:ring-2 focus:ring-[#f5b342]/20 transition-all"
-                                required={field === 'name'}
+                                required
+                                disabled={isSubmitting}
                               />
                             </motion.div>
                           ))}
                         </div>
 
-                        <motion.div initial={{ x: -15, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.4 }}>
+                        <motion.div 
+                          initial={{ x: -15, opacity: 0 }} 
+                          animate={{ x: 0, opacity: 1 }} 
+                          transition={{ delay: 0.3 }}
+                        >
                           <input
                             type="tel"
                             name="phone"
@@ -290,31 +388,76 @@ const banner = () => {
                             value={formData.phone}
                             onChange={handleChange}
                             className="w-full px-3 py-2.5 bg-white/10 border border-white/20 rounded-lg text-white text-xs placeholder-gray-300 focus:outline-none focus:border-[#f5b342] focus:ring-2 focus:ring-[#f5b342]/20 transition-all"
+                            required
+                            disabled={isSubmitting}
                           />
                         </motion.div>
 
-                        <motion.div initial={{ x: -15, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.5 }}>
+                        {/* Package Dropdown */}
+                        <motion.div 
+                          initial={{ x: -15, opacity: 0 }} 
+                          animate={{ x: 0, opacity: 1 }} 
+                          transition={{ delay: 0.4 }}
+                          className="relative"
+                        >
+                          <select
+                            name="package"
+                            value={formData.package || ''}
+                            onChange={handleChange}
+                            className="w-full px-3 py-2.5 bg-white/10 border border-white/20 rounded-lg text-white text-xs placeholder-gray-300 focus:outline-none focus:border-[#f5b342] focus:ring-2 focus:ring-[#f5b342]/20 transition-all appearance-none cursor-pointer"
+                            required
+                            disabled={isSubmitting}
+                          >
+                            <option value="" disabled className="bg-[#0a192f] text-gray-300">Select your package</option>
+                            {packageOptions.map(option => (
+                              <option key={option.value} value={option.value} className="bg-[#0a192f] text-white">
+                                {option.label} - {option.price}
+                              </option>
+                            ))}
+                          </select>
+                          
+                          {/* Custom dropdown arrow */}
+                          <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                            <svg className="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </div>
+                        </motion.div>
+
+                        <motion.div 
+                          initial={{ x: -15, opacity: 0 }} 
+                          animate={{ x: 0, opacity: 1 }} 
+                          transition={{ delay: 0.5 }}
+                        >
                           <textarea
                             name="description"
-                            placeholder="Project details..."
+                            placeholder="Project details (optional)..."
                             value={formData.description}
                             onChange={handleChange}
                             rows={2}
                             className="w-full px-3 py-2.5 bg-white/10 border border-white/20 rounded-lg text-white text-xs placeholder-gray-300 focus:outline-none focus:border-[#f5b342] focus:ring-2 focus:ring-[#f5b342]/20 transition-all resize-none"
+                            disabled={isSubmitting}
                           />
                         </motion.div>
 
                         <motion.button
                           type="submit"
-                          whileHover={{ scale: 1.01 }}
-                          whileTap={{ scale: 0.99 }}
+                          whileHover={{ scale: isSubmitting ? 1 : 1.01 }}
+                          whileTap={{ scale: isSubmitting ? 1 : 0.99 }}
                           initial={{ y: 15, opacity: 0 }}
                           animate={{ y: 0, opacity: 1 }}
                           transition={{ delay: 0.6 }}
-                          className="w-full bg-gradient-to-r from-[#f5b342] to-[#f5d742] text-[#0a192f] font-semibold py-3 rounded-lg hover:shadow-lg hover:shadow-[#f5b342]/20 transition-all duration-300 text-xs flex items-center justify-center gap-1.5 group relative overflow-hidden"
+                          disabled={isSubmitting}
+                          className={`w-full bg-gradient-to-r from-[#f5b342] to-[#f5d742] text-[#0a192f] font-semibold py-3 rounded-lg hover:shadow-lg hover:shadow-[#f5b342]/20 transition-all duration-300 text-xs flex items-center justify-center gap-1.5 group relative overflow-hidden ${
+                            isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                          }`}
                         >
-                          <span className="relative z-10">Send Request</span>
-                          <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform relative z-10" />
+                          <span className="relative z-10">
+                            {isSubmitting ? 'Sending...' : 'Send Request'}
+                          </span>
+                          {!isSubmitting && (
+                            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform relative z-10" />
+                          )}
                           <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                         </motion.button>
                       </form> 
@@ -330,4 +473,4 @@ const banner = () => {
   );
 };
 
-export default banner;
+export default Banner;
