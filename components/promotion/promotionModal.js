@@ -123,7 +123,7 @@ const PromotionModal = ({ isOpen, onClose }) => {
       const selectedPlanData = plans.find(p => p.value === selectedPlan);
       
       // Replace with your actual backend URL
-      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://a2-it-website-backend.vercel.app';
+      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://a2it-bckend-391u.vercel.app/';
       
       const response = await fetch(`${backendUrl}/api/send-email`, {
         method: 'POST',

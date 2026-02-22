@@ -27,10 +27,8 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-[#e8d5c8] flex items-center justify-center p-4 overflow-hidden relative">
       
-      {/* Background Floating Bubbles (Decorative) */}
-      <div className="absolute top-20 left-[15%] w-48 h-24 bg-[#4a4e69] rounded-xl shadow-2xl opacity-90 transform -rotate-2 hidden lg:block"></div>
-      <div className="absolute top-24 right-[20%] w-52 h-28 bg-[#f2cc8f] rounded-xl shadow-2xl opacity-40 transform rotate-3 hidden lg:block"></div>
-      <div className="absolute bottom-24 right-[10%] w-64 h-32 bg-[#3d405b] rounded-xl shadow-2xl opacity-90 transform -rotate-1 hidden lg:block"></div>
+      {/* Background Floating Bubbles (Decorative) */} 
+      <div className="absolute top-24 right-[20%] w-52 h-28 bg-[#f2cc8f] rounded-xl shadow-2xl opacity-40 transform rotate-3 hidden lg:block"></div> 
       
       <div className="relative z-10 w-full max-w-4xl">
         
@@ -80,7 +78,7 @@ const Contact = () => {
              <span className="text-lg md:text-xl">📞</span>
           </div>
           <span className="text-base md:text-xl font-mono font-bold tracking-tighter whitespace-nowrap">
-            (872) 335-3070
+            +880 1846-937397
           </span>
         </div>
 

@@ -215,9 +215,17 @@ export default function PricingSection() {
                         : "md:group-hover:text-white"
                     }
                   `}>
-                    <span className="line-through text-gray-400 mr-2 text-sm md:text-base">
-                      {pkg.oldPrice}
-                    </span>
+                    <span className={`line-through text-gray-400 max-md:text-orange-500 mr-2 text-sm md:text-base transition-colors duration-300
+  ${
+    pkg.color === "green"
+      ? "group-hover:text-red-600"
+      : pkg.color === "slate"
+      ? "group-hover:text-red-600"
+      : "group-hover:text-red-600"
+  }
+`}>
+  {pkg.oldPrice}
+</span>
                     <span className="text-2xl sm:text-3xl md:text-4xl font-bold">
                       {pkg.newPrice}
                     </span>
