@@ -86,7 +86,7 @@ export default function PromotionFooter() {
       setIsSubmitting(true);
       
       try {
-        const response = await fetch('https://a2-it-website-backend.vercel.app/api/send-email', {
+        const response = await fetch('https://a2it-bckend-391u.vercel.app/api/send-email', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

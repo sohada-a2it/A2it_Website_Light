@@ -123,7 +123,7 @@ const PromotionModal = ({ isOpen, onClose }) => {
       const selectedPlanData = plans.find(p => p.value === selectedPlan);
       
       // Replace with your actual backend URL
-      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://a2it-bckend-391u.vercel.app/';
+      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://a2it-bckend-391u.vercel.app';
       
       const response = await fetch(`${backendUrl}/api/send-email`, {
         method: 'POST',
@@ -135,7 +135,7 @@ const PromotionModal = ({ isOpen, onClose }) => {
           email: formData.email,
           phone: formData.phone,
           message: formData.projectDescription || 'No project description provided',
-          type: 'Product_inquiry',
+          type: 'product_inquiry',
           subject: `🔔 New Consultation: ${selectedPlanData?.label} Plan Interested`,
           model: `${selectedPlanData?.label} Plan - ${selectedPlanData?.price}`,
           shippingTerm: `Selected Plan: ${selectedPlanData?.label} (${selectedPlanData?.badge}) - Features: ${selectedPlanData?.features.join(', ')}`
