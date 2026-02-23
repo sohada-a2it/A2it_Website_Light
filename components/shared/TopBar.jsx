@@ -37,7 +37,7 @@ const TopBar = () => {
         </div>
         <div className="flex items-center space-x-1">
           <FaEnvelope className="text-[#0066ff] text-xs sm:text-sm" />
-          <span className="font-medium sm:font-semibold whitespace-nowrap text-black">info@a2itltd.com</span>
+          <span className="font-medium sm:font-semibold whitespace-nowrap text-black">service@a2itltd.com</span>
         </div>
       </div>
 

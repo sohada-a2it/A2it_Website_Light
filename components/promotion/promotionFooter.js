@@ -235,14 +235,14 @@ export default function PromotionFooter() {
 
             {/* Contact Info with Hover Effects */}
             <div className="grid grid-cols-2 gap-3">
-              <a href="mailto:info@a2itltd.com" className="group">
+              <a href="mailto:service@a2itltd.com" className="group">
                 <div className="flex items-center gap-2 p-3 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-orange-500 hover:bg-orange-500/10 transition-all">
                   <div className="w-8 h-8 bg-orange-500/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                     <Mail className="w-4 h-4 text-orange-400 group-hover:text-orange-300" />
                   </div>
                   <div>
                     <p className="text-[10px] text-gray-400">Email Us</p>
-                    <p className="text-xs font-medium group-hover:text-orange-300 transition-colors">info@a2itltd.com</p>
+                    <p className="text-xs font-medium group-hover:text-orange-300 transition-colors">service@a2itltd.com</p>
                   </div>
                 </div>
               </a>

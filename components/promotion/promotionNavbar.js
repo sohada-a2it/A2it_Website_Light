@@ -49,12 +49,12 @@ const PromotionNavbar = () => {
                 ${scrolled ? 'text-white bg-red-500 p-2 rounded-full' : 'text-white'}
               `}>
                 <a 
-                  href="mailto:info@a2itltd.com"
+                  href="mailto:service@a2itltd.com"
                   className="hidden lg:flex items-center gap-2 group"
                 >
                   <Mail size={18} className="text-[#f5b342] group-hover:scale-110 transition-transform" />
                   <span className="text-sm hover:text-[#f5b342] transition-colors border-b border-dashed border-white/30 whitespace-nowrap">
-                    info@a2itltd.com
+                    service@a2itltd.com
                   </span>
                 </a>
               </div>
@@ -129,7 +129,7 @@ const PromotionNavbar = () => {
             `}>
               {/* Mobile Email */}
               <a 
-                href="info@a2itltd.com"
+                href="service@a2itltd.com"
                 className={`
                   flex items-center gap-3 p-2 rounded-lg transition-colors
                   ${scrolled ? 'text-gray-300' : 'text-white'}
@@ -137,7 +137,7 @@ const PromotionNavbar = () => {
                 `}
               >
                 <Mail size={18} className="text-[#f5b342]" />
-                <span className="text-sm">info@a2itltd.com</span>
+                <span className="text-sm">service@a2itltd.com</span>
               </a>
 
               {/* Mobile Phone (full) */}
