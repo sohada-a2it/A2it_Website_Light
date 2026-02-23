@@ -97,7 +97,7 @@ export default function PromotionFooter() {
             email: formData.email,
             phone: formData.phone,
             message: formData.message,
-            subject: `📞 New Footer Consultation: ${formData.name}`
+            subject: `📞 New Consultation: ${formData.name} - Free Consultation Request`
           }),
         });
 

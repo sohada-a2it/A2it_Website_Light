@@ -7,7 +7,7 @@ const projects = [
   { 
     id: 2, 
     img: "/images/project (2).jpeg", 
-    category: "affiliate",
+    category: ["ecommerce"," " , "affiliate"],
     title: "Asian Import Export LTD",
     description: "Our agricultural solutions are designed to support modern farming through sustainable practices, premium-quality products, and efficient supply chains.",
     technologies: ["Next.js", "Nodemailer", "JavaScript"],
@@ -17,7 +17,7 @@ const projects = [
   { 
     id: 3, 
     img: "/images/project (3).jpeg", 
-    category: "affiliate",
+    category: ["ecommerce"," " , "affiliate"],
     title: "Asian Import Export Co.",
     description: "An import-export e-commerce platform connecting Asian manufacturers with global buyers.",
     technologies: [ "Next.js", "Nodemailer", "JavaScript"],
@@ -27,7 +27,7 @@ const projects = [
   { 
     id: 4, 
     img: "/images/project (4).jpeg", 
-    category: "ecommerce",
+    category: ["ecommerce"," " , "affiliate"],
     title: "BestBikeReview – Affiliate Bike Review Platform",
     description: "Affiliate-based bicycle review and buying guide platform focused on helping users choose the best bikes and accessories.",
     technologies: ["React", "Node.js", "MongoDB"],
@@ -47,7 +47,7 @@ const projects = [
   { 
     id: 6, 
     img: "/images/project (6).jpeg", 
-    category: "ecommerce",
+    category: ["ecommerce", " " ,"affiliate"],
     title: "BestBuyersView – Discover, Compare &amp; Pick the Best Products",
     description: "A scalable UI/UX design system created to support a high-performance affiliate review and content-driven platform.",
     technologies: ["Next.js", "Node.js", "express.js","mongodb"],
@@ -77,7 +77,7 @@ const projects = [
   { 
     id: 9, 
     img: "/images/project (9).jpeg", 
-    category: "shopify",
+    category: ["shopify", " " ,"ecommerce"],
     title: "BackPack Pro – Affiliate Travel Gear Review Platform",
     description: "A travel gear review platform providing in-depth analysis and affiliate links for the latest backpacks and travel accessories.",
     technologies: ["shopify"],
@@ -87,10 +87,10 @@ const projects = [
   { 
     id: 10, 
     img: "/images/project (10).jpeg", 
-    category: "wordpress",
+    category: ["ecommerce"," " ,"wordpress"],
     title: "Kitchen Pro Supply – Kitchen Appliances & Equipment Review Platform",
     description: "An affiliate-driven kitchen appliance and equipment review platform helping users choose the best tools for home and professional kitchens.",
-    technologies: ["HTML", "CSS", "JavaScript"],
+    technologies: ["HTML", "CSS", "JavaScript","PHP"],
     client: "Gourmet Bistro",
     date: "2024"
   },
@@ -153,9 +153,16 @@ export default function Project() {
   const thumbRef = useRef(null);
 
   // Filter projects based on active category
-  const filteredProjects = activeCategory === "all" 
-    ? projects 
-    : projects.filter(p => p.category === activeCategory);
+ const filteredProjects = activeCategory === "all" 
+  ? projects 
+  : projects.filter(project => {
+      // যদি project.category array হয়
+      if (Array.isArray(project.category)) {
+        return project.category.includes(activeCategory);
+      }
+      // যদি project.category string হয়
+      return project.category === activeCategory;
+    });
 
   // Get visible projects based on showAll state
   const visibleProjects = showAll ? filteredProjects : filteredProjects.slice(0, 4);
@@ -386,7 +393,7 @@ export default function Project() {
       {/* Lightbox with Project Details - Mobile Optimized */}
       {lightboxOpen && (
         <div 
-          className="fixed inset-0 bg-black/95 z-50 flex flex-col"
+          className="fixed inset-0 bg-black/95 z-50 flex flex-col px-20"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
         >
@@ -410,9 +417,9 @@ export default function Project() {
           </div>
 
           {/* MAIN CONTENT - Stack on mobile, side by side on desktop */}
-          <div className="flex-1 flex flex-col lg:flex-row p-2 sm:p-4 gap-2 sm:gap-4 overflow-auto">
+          <div className="flex-1 flex flex-col lg:flex-row p-2 sm:p-4 gap-2 sm:gap-4 overflow-auto  ">
             {/* Image Section */}
-            <div className="lg:w-2/3 flex justify-center items-center bg-gray-900/30 rounded-xl p-2 sm:p-4 min-h-[40vh] sm:min-h-[50vh] lg:min-h-0">
+            <div className="lg:w-2/3 flex justify-center items-center bg-gray-900/30 rounded-xl p-2 sm:p-4 min-h-[40vh] sm:min-h-[50vh] lg:min-h-0 px-20">
               <div
                 onClick={() => setIsZoomed(!isZoomed)}
                 onMouseMove={handleMouseMove}
@@ -512,7 +519,7 @@ export default function Project() {
           {/* ARROWS - Hidden on mobile (use swipe instead) */}
           <button
             onClick={prevImage}
-            className="hidden lg:flex absolute left-5 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-blue-500 transition bg-black/30 w-12 h-12 rounded-full items-center justify-center"
+            className="hidden lg:flex absolute left-5 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-blue-500 transition bg-[#f5b342] w-12 h-12 rounded-full items-center justify-center"
             aria-label="Previous image"
           >
             ‹
@@ -520,7 +527,7 @@ export default function Project() {
 
           <button
             onClick={nextImage}
-            className="hidden lg:flex absolute right-5 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-blue-500 transition bg-black/30 w-12 h-12 rounded-full items-center justify-center"
+            className="hidden lg:flex absolute right-5 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-blue-500 transition bg-[#f5b342] w-12 h-12 rounded-full items-center justify-center"
             aria-label="Next image"
           >
             ›

@@ -136,7 +136,7 @@ const PromotionModal = ({ isOpen, onClose }) => {
           phone: formData.phone,
           message: formData.projectDescription || 'No project description provided',
           type: 'product_inquiry',
-          subject: `🔔 New Consultation: ${selectedPlanData?.label} Plan Interested`,
+          subject: `🔔 NEW PRODUCT INQUIRY: ${selectedPlanData?.label} Plan - 70% OFF`, 
           model: `${selectedPlanData?.label} Plan - ${selectedPlanData?.price}`,
           shippingTerm: `Selected Plan: ${selectedPlanData?.label} (${selectedPlanData?.badge}) - Features: ${selectedPlanData?.features.join(', ')}`
         })

@@ -101,7 +101,7 @@ const Banner = () => {
     };
 
     try {
-      const response = await fetch('https://a2-it-website-backend.vercel.app/api/send-email', {
+      const response = await fetch('https://a2it-bckend-391u.vercel.app/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ const Banner = () => {
           model: packageDetails[formData.package] || formData.package,
           shippingTerm: '50% OFF Eligible - Website Package',
           message: formData.description || 'No project description provided',
-          subject: `🎯 NEW BANNER INQUIRY: ${formData.package} Package - 50% OFF`
+          subject: `🎯 NEW PRODUCT INQUIRY: ${formData.package} Package - 50% OFF`
         }),
       });
 

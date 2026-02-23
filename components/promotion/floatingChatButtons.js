@@ -29,7 +29,7 @@ export default function FloatingChatButtons() {
   
   <button
     onClick={() => window.open('https://www.google.com/maps/place/Pallabi/@23.8260058,90.3605328,14z/data=!3m1!4b1!4m6!3m5!1s0x3755c13eb3b73875:0xff0422f2f438c467!8m2!3d23.8203566!4d90.3649546!16s%2Fg%2F11f712ctr7?entry=ttu&g_ep=EgoyMDI2MDIxOC4wIKXMDSoASAFQAw%3D%3D', '_blank')}
-    className="bg-blue-500 hover:bg-blue-600 text-white w-12 h-12 rounded-l-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:translate-x-[-4px] relative z-10"
+    className=" bg-blue-500  hover:bg-blue-600 text-white w-12 h-12 rounded-l-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:translate-x-[-4px] relative z-10"
   >
     <MapPin className="w-5 h-5" />
   </button>
@@ -52,7 +52,7 @@ export default function FloatingChatButtons() {
             
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-blue-500 hover:bg-blue-600 text-white w-12 h-12 rounded-l-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:translate-x-[-4px] relative z-10"
+              className="bg-[#f5b342] hover:bg-blue-600 text-white w-12 h-12 rounded-l-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:translate-x-[-4px] relative z-10"
             >
               <FileText className="w-5 h-5" />
             </button>
