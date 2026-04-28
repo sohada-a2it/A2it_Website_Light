@@ -23,7 +23,7 @@ const Navbar = () => {
    const pathname = usePathname();
   
   // Check if current path is the one where navbar should be hidden
-  const hideNavbarPaths = ['/promotions/a2itwebsite/']; // Add your paths here
+  const hideNavbarPaths = ['/promotions/website/']; // Add your paths here
   const shouldHideNavbar = hideNavbarPaths.includes(pathname);
   
   // If navbar should be hidden, return null (render nothing)

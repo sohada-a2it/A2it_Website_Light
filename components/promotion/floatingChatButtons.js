@@ -60,13 +60,19 @@ export default function FloatingChatButtons() {
         </div>
 
         {/* Bottom WhatsApp Button */}
-        <button
-          onClick={() => window.open('https://wa.me/1234567890', '_blank')}
-          className="relative bg-green-600 hover:bg-green-700 text-white p-4 rounded-full shadow-2xl flex items-center gap-3 transition-all duration-300 hover:scale-105 hover:shadow-xl border-2 border-white/20"
-        >
-          <MessageCircle className="w-6 h-6" /> 
-          <span className="absolute inset-0 rounded-full bg-green-600 animate-ping opacity-30"></span>
-        </button>
+<button
+  onClick={() => window.open('https://wa.me/8801846937397', '_blank')}
+  className="fixed bottom-1 md:bottom-1 right-1 md:right-1 
+    bg-green-600 hover:bg-green-700 text-white 
+    p-2 md:p-3 rounded-full shadow-2xl 
+    flex items-center justify-center
+    transition-all duration-300 hover:scale-105 hover:shadow-xl 
+    border-2 border-white/20
+    z-50"
+>
+  <MessageCircle className="w-6 h-6 md:w-7 md:h-7" />
+  <span className="absolute inset-0 rounded-full bg-green-600 animate-ping opacity-30"></span>
+</button>
       </div>
 
       {/* Consult Modal */}

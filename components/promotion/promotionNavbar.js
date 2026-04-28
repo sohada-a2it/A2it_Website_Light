@@ -7,15 +7,39 @@ import { Phone, Mail, MessageCircle, Menu, X } from 'lucide-react';
 const PromotionNavbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [navbarVisible, setNavbarVisible] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 50);
+      
+      // For mobile devices (width < 768px)
+      if (window.innerWidth < 768) {
+        // If mobile menu is open, close it when scrolling
+        if (mobileMenuOpen) {
+          setMobileMenuOpen(false);
+        }
+        
+        if (currentScrollY > lastScrollY && currentScrollY > 80) {
+          // Scrolling down - hide navbar
+          setNavbarVisible(false);
+        } else if (currentScrollY < lastScrollY || currentScrollY < 10) {
+          // Scrolling up OR at the very top - show navbar
+          setNavbarVisible(true);
+        }
+      } else {
+        // On desktop, always show navbar
+        setNavbarVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY, mobileMenuOpen]);
 
   return (
     <>
@@ -26,12 +50,17 @@ const PromotionNavbar = () => {
             ? 'fixed top-0 bg-secondary/95 backdrop-blur-md shadow-lg border-b border-[#f5b342]' 
             : 'absolute top-0 bg-gradient-to-b from-black/50 to-transparent'
           }
+          ${!navbarVisible ? '-translate-y-full' : 'translate-y-0'}
         `}
+        style={{
+          transition: 'transform 0.3s ease-in-out'
+        }}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-3 md:py-4">
             {/* Brand Section */}
-            <div className="flex items-center gap-2 sm:gap-3">
+            <a href="https://a2itltd.com/">
+              <div className="flex items-center gap-2 sm:gap-3">
               <div className="flex items-center gap-1">
                 <img 
                   className='w-8 sm:w-12 md:w-10 lg:w-14 object-contain transition-all duration-300' 
@@ -40,6 +69,7 @@ const PromotionNavbar = () => {
                 />
               </div>
             </div>
+            </a>
 
             {/* Desktop Contact Section */}
             <div className="hidden md:flex items-center gap-3 lg:gap-6">
@@ -89,16 +119,14 @@ const PromotionNavbar = () => {
     }
   `}
 >
-  <MessageCircle size={18} className="group-hover:rotate-12 transition-transform" />
-  <span className="hidden sm:inline">Connect with us</span>
+  {/* <MessageCircle size={18} className="group-hover:rotate-12 transition-transform" /> */}
+  <span className="hidden sm:inline">Stay Connected</span>
   <span className="sm:hidden">Connect</span>
 </a>
             </div>
 
             {/* Mobile Menu Button */}
             <div className="flex md:hidden items-center gap-3">
-              {/* Mobile Phone - Always visible */}  
-
               {/* Hamburger Menu */}
               <button 
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -129,7 +157,7 @@ const PromotionNavbar = () => {
             `}>
               {/* Mobile Email */}
               <a 
-                href="service@a2itltd.com"
+                href="mailto:service@a2itltd.com"
                 className={`
                   flex items-center gap-3 p-2 rounded-lg transition-colors
                   ${scrolled ? 'text-gray-300' : 'text-white'}
@@ -162,8 +190,8 @@ const PromotionNavbar = () => {
     hover:bg-[#f5b342]/90 transition-all duration-300
   "
 >
-  <MessageCircle size={18} className="text-[#0b1c2f]" />
-  <span>Connect with us</span>
+  {/* <MessageCircle size={18} className="text-[#0b1c2f]" /> */}
+  <span>Stay Connected</span>
 </button>
             </div>
           </div>

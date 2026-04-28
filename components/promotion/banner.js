@@ -164,7 +164,7 @@ const Banner = () => {
   if (!mounted) return null;
 
   return (
-    <div className="relative w-full overflow-hidden bg-[#0a192f] pt-40 ">
+    <div className="relative w-full overflow-hidden bg-[#0a192f] pt-30 ">
       
       {/* Platforms Logos Floating Above Banner */}
       <div className="absolute bottom-2 z-40 left-0 w-full flex justify-center">
@@ -174,10 +174,10 @@ const Banner = () => {
       {/* Background Image with Dark Overlay */}
       <div className="absolute inset-0 z-0">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-[0.5px]"
           style={{ backgroundImage: "url('/images/banner.png')" }}
         />
-        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="absolute inset-0 bg-black/50"></div>
       </div>
 
       {/* Animated Background Elements */}
@@ -187,18 +187,18 @@ const Banner = () => {
       </div>
 
       {/* Main Hero Content */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
           
           {/* Left Content */}
-          <div className={`space-y-5 sm:space-y-6 text-white order-2 lg:order-1 transition-all duration-500 ${showForm ? 'lg:col-span-1' : 'lg:col-span-2 lg:max-w-3xl lg:mx-auto text-center'}`}>
+          <div className={`space-y-5 sm:space-y-6 text-white order-2 lg:order-1 transition-all duration-500    ${showForm ? 'lg:col-span-1' : 'lg:col-span-2 lg:max-w-3xl lg:mx-auto text-center '}`}>
             
             {/* Top Badge */}
             <motion.div 
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className={`inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-[#f5b342]/20 to-[#f5b342]/5 backdrop-blur-md px-4 sm:px-6 py-2 sm:py-3 rounded-full border-2 border-[#f5b342] shadow-lg shadow-[#f5b342]/30 hover:shadow-[#f5b342]/50 hover:scale-105 hover:border-[#f5b342] transition-all duration-300 group cursor-pointer ${showForm ? '' : 'mx-auto'}`}
+              className={`inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-[#f5b342]/20 to-[#f5b342]/5 backdrop-blur-md px-4 sm:px-6 py-2 sm:py-3 rounded-full border-2 border-[#f5b342] shadow-lg shadow-[#f5b342]/30 hover:shadow-[#f5b342]/50 hover:scale-105 hover:border-[#f5b342] transition-all duration-300 group ${showForm ? '' : 'mx-auto'}`}
             >
               <div className="relative">
                 <Sparkles size={20} className="text-[#f5b342] animate-pulse" />
@@ -297,7 +297,7 @@ const Banner = () => {
 
                 {/* Form Container */}
                 <div className="relative group">
-                  <div className="relative bg-white/10 backdrop-blur-md rounded-xl p-4 sm:p-5 border border-white/20 shadow-xl">
+                  <div className="relative bg-black/10 backdrop-blur-md rounded-xl p-4 sm:p-5 border border-white/20 shadow-xl">
                     
                     {/* Decorative Elements */}
                     <motion.div 
